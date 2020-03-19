@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
+import ToggleSwitchReactNative from 'toggle-switch-react-native';
 
 export const Container = styled(LinearGradient).attrs({
   colors: ['#48c6ef', '#6f86d6'],
@@ -37,7 +38,12 @@ export const TextTypeTemperature = styled.Text`
 
 export const Options = styled.View`
   flex-direction: row;
-  background-color: green;
   flex: 1;
+  align-items: center;
+  justify-content: space-between;
   max-height: 10%;
 `;
+
+export const ToggleSwitch = styled(ToggleSwitchReactNative).attrs({
+  onColor: '#DDD',
+})``;

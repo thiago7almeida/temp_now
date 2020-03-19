@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
 import {getLatLonSuccess, getLocationInfo} from '../store/ducks/info';
@@ -15,9 +15,17 @@ import {
   Title,
   SubTitle,
   Options,
+  TextTypeTemperature,
+  ToggleSwitch,
 } from './styles';
 
 export default function App() {
+  //functions
+  const handleToggle = () => setIsOn(!isOn);
+
+  //state
+  const [isOn, setIsOn] = useState(false);
+
   //reducer
   const {location, city} = useSelector(state => state.info);
 
@@ -66,7 +74,13 @@ export default function App() {
           longitude={location?.coords?.longitude}
         />
         <InfoView />
-        <Options />
+        <Options>
+          <TextTypeTemperature>Celsius</TextTypeTemperature>
+          <ToggleSwitch large isOn={isOn} onToggle={handleToggle} />
+          <TextTypeTemperature style={{textAlign: 'right'}}>
+            Fahrenheit
+          </TextTypeTemperature>
+        </Options>
       </Content>
     </Container>
   );
