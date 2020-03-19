@@ -1,5 +1,5 @@
 {
-  "name": "WeatherForecast",
+  "name": "weatherforecast",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -8,10 +8,6 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint ."
-  },
-  "dependencies": {
-    "react": "16.9.0",
-    "react-native": "0.61.5"
   },
   "dependencies": {
     "@react-native-community/geolocation": "^2.0.2",
