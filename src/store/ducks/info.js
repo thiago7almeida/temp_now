@@ -27,26 +27,21 @@ export default function reducer(state = initialState, action) {
   }
 }
 
-export function getLatLon() {
-  return {
-    type: Types.GET_LAT_LON,
-  };
-}
 export function getLatLonSuccess({location}) {
   return {
     type: Types.GET_LAT_LON_SUCCESS,
-    data: {location},
+    payload: {location},
   };
 }
 export function getLocationInfo({latitude, longitude}) {
   return {
     type: Types.GET_LOCATION_INFO,
-    data: {latitude, longitude},
+    payload: {latitude, longitude},
   };
 }
 export function getLocationInfoSuccess({city}) {
   return {
     type: Types.GET_LOCATION_INFO_SUCCESS,
-    data: {city},
+    payload: {city},
   };
 }

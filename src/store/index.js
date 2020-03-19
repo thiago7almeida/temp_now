@@ -7,7 +7,7 @@ const persistConfig = {
   key: 'gol_test',
   stateReconciler: autoMergeLevel2,
   storage: AsyncStorage,
-  whitelist: [],
+  whitelist: ['info'],
 };
 
 import rootSaga from './sagas';
