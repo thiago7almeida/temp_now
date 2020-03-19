@@ -34,3 +34,10 @@ export const TextTypeTemperature = styled.Text`
   font-size: 16px;
   width: 33%;
 `;
+
+export const Options = styled.View`
+  flex-direction: row;
+  background-color: green;
+  flex: 1;
+  max-height: 10%;
+`;
