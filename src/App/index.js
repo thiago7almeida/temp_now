@@ -1,4 +1,8 @@
-import React from 'react';
+import React, {useCallback, useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+
+import {getLatLon} from '../store/ducks/info';
+
 import InfoView from '../components/InfoView';
 import MapView from '../components/MapView';
 
@@ -12,6 +16,14 @@ import {
 } from './styles';
 
 export default function App() {
+  //actions
+  const dispatch = useDispatch();
+  const getLocation = useCallback(value => dispatch(getLatLon()), [dispatch]);
+
+  //life cicle
+  useEffect(() => {
+    getLocation();
+  }, []);
   return (
     <Container>
       <Content>

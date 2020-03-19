@@ -1,12 +1,12 @@
 import {takeLatest, all} from 'redux-saga/effects';
-import {Types as historyTypes} from '../ducks/history';
+import {Types} from '../ducks/info';
 
-import * as history from './history';
+import * as info from './info';
 
-export function* watchAsyncHistory() {
-  yield takeLatest(historyTypes.ASYNC_GET_HISTORY, history.getHistoryAsync);
+export function* watchAsyncInfo() {
+  yield takeLatest(Types.GET_LAT_LON, info.getLocation);
 }
 
 export default function* rootSaga() {
-  yield all([watchAsyncHistory()]);
+  yield all([watchAsyncInfo()]);
 }
