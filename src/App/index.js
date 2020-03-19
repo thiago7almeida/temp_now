@@ -16,6 +16,9 @@ import {
 } from './styles';
 
 export default function App() {
+  //reducer
+  const {location} = useSelector(state => state.info);
+
   //actions
   const dispatch = useDispatch();
   const getLocation = useCallback(value => dispatch(getLatLon()), [dispatch]);
@@ -31,7 +34,10 @@ export default function App() {
           <Title>Cidade</Title>
           <SubTitle>18°</SubTitle>
         </TitleWrapper>
-        <MapView />
+        <MapView
+          latitude={location?.coords?.latitude}
+          longitude={location?.coords?.longitude}
+        />
         <InfoView />
         <Options />
       </Content>
