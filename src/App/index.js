@@ -1,5 +1,6 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
+import {showMessage} from 'react-native-flash-message';
 
 import {getLatLonSuccess, getLocationInfo} from '../store/ducks/info';
 
@@ -18,6 +19,7 @@ import {
   TextTypeTemperature,
   ToggleSwitch,
 } from './styles';
+import {toFahrenheit} from '../services/Utils';
 
 export default function App() {
   //functions
@@ -27,7 +29,7 @@ export default function App() {
   const [isOn, setIsOn] = useState(false);
 
   //reducer
-  const {location, city} = useSelector(state => state.info);
+  const {location, city, info} = useSelector(state => state.info);
 
   //actions
   const dispatch = useDispatch();
@@ -44,11 +46,23 @@ export default function App() {
   useEffect(() => {
     async function GetLocation() {
       const {message, permission} = await hasLocationPermission();
-      if (!permission) console.log(message);
+      if (!permission)
+        showMessage({
+          message: message,
+          type: 'danger',
+          icon: 'danger',
+          duration: 3000,
+        });
       else {
         getLocation(
           position => getLatLonAction({location: position}),
-          error => setError(error),
+          error =>
+            showMessage({
+              message: error.message,
+              type: 'danger',
+              icon: 'danger',
+              duration: 3000,
+            }),
         );
       }
     }
@@ -67,13 +81,19 @@ export default function App() {
       <Content>
         <TitleWrapper>
           <Title>{city?.title}</Title>
-          <SubTitle>18°</SubTitle>
+          <SubTitle>
+            {info.length > 0 &&
+              Math.round(
+                isOn ? toFahrenheit(info[0].the_temp) : info[0].the_temp,
+              )}
+            °
+          </SubTitle>
         </TitleWrapper>
         <MapView
           latitude={location?.coords?.latitude}
           longitude={location?.coords?.longitude}
         />
-        <InfoView />
+        <InfoView fahrenheit={isOn} data={info} />
         <Options>
           <TextTypeTemperature>Celsius</TextTypeTemperature>
           <ToggleSwitch large isOn={isOn} onToggle={handleToggle} />
